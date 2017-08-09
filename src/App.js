@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { Asset } from 'expo';
 import { View } from 'react-native';
+import { SQLite, FileSystem } from 'expo';
 import { Router } from './Router';
 import { download } from './actions';
 import { connect } from 'react-redux';
-import { APP_READY } from './actions/types';
+import { APP_READY, DOWNLOAD } from './actions/types';
 import { addNavigationHelpers } from 'react-navigation';
 import cacheAssets from './../utilities/cacheAssets';
-import { Asset } from './../utilities/enhancedAsset';
-import { DB } from './../db';
+//import { DB } from './../db';
 
 class App extends Component {
 	async loadAssets() {
@@ -38,35 +37,34 @@ class App extends Component {
 		this.props.dispatch({type:APP_READY});
 	}
 
-	async makeSQLiteDirAsync() {
-	    const dbTest = SQLite.openDatabase('dummy.db');
-
-	    try {
-	      await dbTest.transaction(tx => tx.executeSql(''));
-	    } catch(e) {
-	        console.log('error while executing SQL in dummy DB');
-	        console.log(e.message);
-	    }
+	async loadDB() {
+		this.makeSQLiteDirAsync();
+		await FileSystem.downloadAsync(
+		  'https://github.com/RE-N-Y/final/blob/master/db.db?raw=true',
+		  FileSystem.documentDirectory + 'SQLite/db.db'
+		);
   	}
+
+	async makeSQLiteDirAsync() {
+	  	const dbTest = SQLite.openDatabase('key.db');
+	    await dbTest.transaction(tx => tx.executeSql(''));
+	}
 
 	componentWillMount() {
 		this.loadAssets();
-
-		if (this.props.download) {
-
-		}
 
 		/*DB.transaction(tx => {
 	      tx.executeSql(
 	        'drop table Q;'
 	      );
 	    });*/
+	    //this.loadDB();
 
-		DB.transaction(tx => {
+		/*DB.transaction(tx => {
 	      tx.executeSql(
 	        'create table if not exists Q (id integer primary key not null, question text, options text, answers text, source text, music text, anime text, category text);'
 	      );
-	    });
+	    });*/
 	}
 
 	render() {
@@ -87,7 +85,7 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-	return { nav: state.nav, ready: state.app.ready, main: state.main };
+	return { nav: state.nav, ready: state.app.ready, download: state.main.download };
 };
 
-export default connect(mapStateToProps,{})(App);
+export default connect(mapStateToProps)(App);

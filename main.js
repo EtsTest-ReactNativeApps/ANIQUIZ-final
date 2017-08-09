@@ -1,7 +1,7 @@
 import Expo from 'expo';
 import React from 'react';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { compose, createStore, applyMiddleware } from 'redux';
 import reducers from './src/reducers';
 import { AsyncStorage } from 'react-native';
 import { persistStore, autoRehydrate } from 'redux-persist';
