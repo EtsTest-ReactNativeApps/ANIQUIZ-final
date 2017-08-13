@@ -13,6 +13,7 @@ const Label = (props) => {
 
 const styles = {
 	labelStyle: {
+		flex:1,
 		height: 30,
 		width: 30,
 		backgroundColor: '#8C88FF',
@@ -29,14 +30,10 @@ const styles = {
 		justifyContent: 'center',
 	},
 	labelTextStyle: {
-		height: 20,
-		width: 10,
+		textAlignVertical: "center",
+		borderRadius: 15,
 		fontFamily: 'Avenir-Heavy',
-		fontSize: 20,
-		lineHeight: 20,
-		marginTop: 3,
-		paddingTop: 2,
-		marginRight: -1,
+		fontSize: 18,
 		textAlign: 'center',
 		color: '#333333',
 	}

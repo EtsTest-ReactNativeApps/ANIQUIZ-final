@@ -6,6 +6,7 @@ import StatusScreen from './screens/StatusScreen';
 import SelectScreen from './screens/SelectScreen';
 import DeckScreen from './screens/DeckScreen';
 import LightBoxScreen from './screens/LightBoxScreen';
+import TutorialScreen from './screens/TutorialScreen';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 
 const stackNavigatorOption = {
@@ -48,6 +49,7 @@ const Pack = StackNavigator({
 
 const Router = StackNavigator({
 	start: { screen: StartScreen },
+	tutorial: { screen: TutorialScreen },
 	main: {
 		screen: TabNavigator({
 			status: { screen: StatusScreen },

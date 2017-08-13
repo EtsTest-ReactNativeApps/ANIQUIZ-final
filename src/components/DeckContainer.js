@@ -79,9 +79,21 @@ class DeckContainer extends Component {
   }
 
   render() {
+
     let chain = this.props.mode === 'Challenge' ? this.props.correct : -1;
     let time = this.props.mode === 'Time' ? true : false;
     let loaded = this.state.pack.length !== 0 ? true : false;
+
+    let condition;
+
+    if (this.props.mode === 'Challenge') {
+      condition = (this.props.wrong >= 1 || this.props.index >= this.state.pack.length);
+    } else if (this.props.mode === 'Time') {
+      condition = (this.props.time <= 0 || this.props.index >= this.state.pack.length);
+    } else {
+      condition = this.props.index >= this.state.pack.length;
+    }
+
 
     if (loaded) {
       return (
@@ -94,6 +106,7 @@ class DeckContainer extends Component {
           >
             <Swiper
               pack={this.state.pack}
+              condition={condition}
               renderQuiz={item=>{
                 return(
                   <Animated.View>
@@ -124,9 +137,9 @@ class DeckContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { correct, wrong, mode, deck } = state.quiz;
+  const { correct, wrong, mode, deck, index, time } = state.quiz;
 
-  return { correct, wrong, mode, deck };
+  return { correct, wrong, mode, deck, index, time };
 }
 
 export default connect(mapStateToProps,{setHintNum})(DeckContainer);

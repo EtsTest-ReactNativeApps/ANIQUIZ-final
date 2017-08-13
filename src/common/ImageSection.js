@@ -35,7 +35,7 @@ const ImageSection = (props) => {
 						width={width/2}
 						height={height/2}
 					>
-						<View style={styles.labelStyle}><Label>1</Label></View>
+						<View style={styles.labelStyle}><Label color="#fff">1</Label></View>
 					</ResponsiveImage>
 					<ResponsiveImage
 						lightbox 
@@ -43,7 +43,7 @@ const ImageSection = (props) => {
 						width={width/2}
 						height={height/2}
 					>
-						<View style={styles.labelStyle}><Label>2</Label></View>
+						<View style={styles.labelStyle}><Label color="#fff">2</Label></View>
 					</ResponsiveImage>
 				</View>
 				<View style={{flexDirection:'row'}}>
@@ -53,7 +53,7 @@ const ImageSection = (props) => {
 						width={width/2}
 						height={height/2}
 					>
-						<View style={styles.labelStyle}><Label>3</Label></View>
+						<View style={styles.labelStyle}><Label color="#fff">3</Label></View>
 					</ResponsiveImage>
 					<ResponsiveImage
 						lightbox 
@@ -61,7 +61,7 @@ const ImageSection = (props) => {
 						width={width/2}
 						height={height/2}
 					>
-						<View style={styles.labelStyle}><Label>4</Label></View>
+						<View style={styles.labelStyle}><Label color="#fff">4</Label></View>
 					</ResponsiveImage>
 				</View>
 			</View>

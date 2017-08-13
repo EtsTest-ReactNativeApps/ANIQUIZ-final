@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { setHint, setHintNum } from './../actions';
 
@@ -40,7 +40,7 @@ const styles = {
 		alignItems: 'center',
 		justifyContent: 'center',
 		marginLeft: -12,
-		marginTop: -17
+		marginTop: Platform.OS === 'android' ? 3 : -17,
 	},
 	textStyle: {
 		fontSize: 18,

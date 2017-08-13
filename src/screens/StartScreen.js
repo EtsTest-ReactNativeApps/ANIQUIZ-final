@@ -13,7 +13,7 @@ class StartScreen extends Component {
 				<View style={styles.launcherContainer}>
 					<Image style={styles.logoStyle} source={require('./../../assets/icons/logo.png')}/>
 					<Text style={styles.textStyle}>ANIQUIZ</Text>
-					<Pill onPress={()=>{this.props.navigate('pack')}}>START</Pill>
+					<Pill onPress={()=>{this.props.downloaded ? this.props.navigate('pack') : this.props.navigate('tutorial') }}>START</Pill>
 				</View>
 			</Image>
 		);
@@ -54,5 +54,8 @@ const styles = {
 	}
 }
 
+const mapStateToProps = ({main}) => {
+	return { downloaded: main.downloaded }
+};
 
-export default connect(null,{ navigate })(StartScreen);
+export default connect(mapStateToProps,{ navigate })(StartScreen);

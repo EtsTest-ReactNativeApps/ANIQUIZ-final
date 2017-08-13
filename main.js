@@ -13,7 +13,7 @@ class Aniquiz extends React.Component {
   render() {
     const store = createStore(reducers,{},compose(applyMiddleware(ReduxThunk),autoRehydrate()));
 
-    persistStore(store, { storage: AsyncStorage, whitelist:['app']});
+    persistStore(store, { storage: AsyncStorage, whitelist:['main']});
     
     return (
       <Provider store={store}>

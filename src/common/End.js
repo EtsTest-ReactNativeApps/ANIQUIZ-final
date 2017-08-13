@@ -4,6 +4,8 @@ import { Skewed } from './Skewed';
 import { connect } from 'react-redux';
 import { back } from './../actions';
 import { Pill } from './Pill';
+import Download from './../components/Download';
+import AnimeChecker from './../components/AnimeChecker';
 import Graph from './Graph';
 
 const End = (props) => {
@@ -56,23 +58,39 @@ const End = (props) => {
 		quoterStyle
 	} = styles;
 
-	return (
-		<View style={endContainerStyle}>
-			<View>
-				<Skewed width={WIDTH} height={HEIGHT}>
-					RESULT
-				</Skewed>
-				<View style={{alignItems:'center'}}>
-					<Graph/>
-				</View>
-				<View style={quoteContainerStyle}>
-					<Text style={quoteStyle}>I'm Haruhi Suzumiya, from East Junior High. First off, I'm not interested in ordinary people. But, if any of you are aliens, time-travelers, or espers, please come see me. That is all!</Text>
-					<Text style={quoterStyle}>-Haruhi Suzumiya</Text>
-				</View>
+	//Add Download Section
+	
+	//not using !props.downloaded since it should also work when props.downloaded is null
+
+	if (props.downloaded !== 'complete') {
+		return (
+			<View style={[endContainerStyle,{marginLeft:0,marginTop:-35,backgroundColor:'transparent'}]}>
+				<AnimeChecker/>
 			</View>
-			<Pill onPress={()=>{props.back()}}>FINISHED</Pill>
-		</View>
-	);
+		);
+	} else {
+		return (
+			<View style={endContainerStyle}>
+				<View>
+					<Skewed width={WIDTH} height={HEIGHT}>
+						RESULT
+					</Skewed>
+					<View style={{alignItems:'center'}}>
+						<Graph/>
+					</View>
+					<View style={quoteContainerStyle}>
+						<Text style={quoteStyle}>I'm Haruhi Suzumiya, from East Junior High. First off, I'm not interested in ordinary people. But, if any of you are aliens, time-travelers, or espers, please come see me. That is all!</Text>
+						<Text style={quoterStyle}>-Haruhi Suzumiya</Text>
+					</View>
+				</View>
+				<Pill onPress={()=>{props.back()}}>FINISHED</Pill>
+			</View>
+		);
+	}	
 }
 
-export default connect(null,{back})(End);
+const mapStateToProps = ({main}) => {
+	return { downloaded: main.downloaded }
+};
+
+export default connect(mapStateToProps,{back})(End);

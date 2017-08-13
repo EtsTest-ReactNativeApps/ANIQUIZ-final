@@ -1,21 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text, Dimensions, Image, TouchableOpacity, TouchableWithoutFeedback, UIManager, LayoutAnimation } from 'react-native';
+import { View, Text, Dimensions, Image, TouchableOpacity, TouchableWithoutFeedback, UIManager, LayoutAnimation, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { checkAnswer, setHint, resetAnswer } from './../actions';
 import { ImageSection, Result } from './../common';
 import ResponsiveImage from './../common/ResponsiveImage';
 import Music from './../components/Music';
 import Hint from './../common/Hint';
-import cacheAssets from './../../utilities/cacheAssets';
 
 const CARD_WIDTH = Dimensions.get('window').width - 10;
 const CARD_HEIGHT = Dimensions.get('window').height - 100;
 
 class Quiz extends Component {
-
-	async loadAssets() {
-		await cacheAssets({images: this.props.source});
-	}
 
 	constructor(props) {
 		super(props);
@@ -25,10 +20,6 @@ class Quiz extends Component {
 			hint: false,
 			selectedOptions: []
 		};
-	}
-
-	componentWillMount() {
-		this.loadAssets();
 	}
 
 	componentWillUnmount() {
@@ -92,34 +83,37 @@ class Quiz extends Component {
 		}
 	}
 
+	renderResponsiveImage(i,height) {
+		return (
+			<ResponsiveImage
+				resizeMode="cover"
+				source={this.props.source[i]}
+				width={CARD_WIDTH}
+				height={height/2}
+			/>
+		);
+	}
+
 	renderImage() {
 		const height = this.props.deck === 'Character' ? CARD_HEIGHT : 0;
 
 		if(this.props.deck === 'Character') {
 			if (this.state.hint) {
-				return (
-					<ResponsiveImage
-						resizeMode="cover"
-						source={this.props.source[1]}
-						width={CARD_WIDTH}
-						height={height/2}
-					/>
-				);
-			} else {
+				return this.renderResponsiveImage(1,height);
+			} else if (Platform.OS === 'ios') {
 				return (
 					<View>
-						<ResponsiveImage
-							resizeMode="cover"
-							source={this.props.source[0]}
-							width={CARD_WIDTH}
-							height={height/2}
-						/>
+						{this.renderResponsiveImage(0,height)}
 					</View>
 				);
+			} else {
+				return this.renderResponsiveImage(0,height);
 			}
 		} else {
 			return (
-				<ImageSection width={CARD_WIDTH} height={height} source={this.props.source}/>
+				<View style={{elevation:1,zIndex:1}}>
+					<ImageSection width={CARD_WIDTH} height={height} source={this.props.source}/>
+				</View>
 			);
 		}
 	}
@@ -186,9 +180,9 @@ class Quiz extends Component {
 			floatStyle: {
 				position: 'absolute',
 				zIndex: 100,
-				elevation: 4,
+				elevation: 100,
 				right: 7,
-				top: (this.props.deck === 'Music' ? -40 : -20)
+				top: (Platform.OS === 'android' ? undefined : (this.props.deck === 'Music' ? -40 : -20))
 			}
 		};
 		const {

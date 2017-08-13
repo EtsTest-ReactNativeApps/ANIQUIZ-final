@@ -45,8 +45,9 @@ class Swiper extends Component {
 
   componentWillMount() {
     this.props.setIndex(0);
-
-    this.props.lightbox(this.props.pack[0].title, this.props.pack[0].question);
+    if(this.props.pack[0].title) {
+      this.props.lightbox(this.props.pack[0].title, this.props.pack[0].question);
+    }
   }
 
   componentWillUpdate() {
@@ -95,15 +96,8 @@ class Swiper extends Component {
   }
 
   renderCards() {
-    const {
-      mode
-    } = this.props;
 
-    let normal = this.props.index >= this.props.pack.length && mode === 'Normal';
-    let challenge = (this.props.wrong >= 1 || this.props.index >= this.props.pack.length) && mode === 'Challenge';
-    let time = (this.props.time <= 0 || this.props.index >= this.props.pack.length) && mode === 'Time';
-
-    if (normal||challenge||time) {
+    if (this.props.condition) {
       return (
         <End />
       );

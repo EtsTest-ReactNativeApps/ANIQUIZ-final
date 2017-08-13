@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Image, TouchableWithoutFeedback, UIManager, LayoutAnimation } from 'react-native';
+import { View, Image, Platform, TouchableWithoutFeedback, LayoutAnimation } from 'react-native';
 import { connect } from 'react-redux';
 import { navigate, selectLightboxImage } from './../actions';
+import resolveAssetSource from 'resolveAssetSource';
 
 class ResponsiveImage extends Component {
 	constructor() {
@@ -19,40 +20,45 @@ class ResponsiveImage extends Component {
 	}
 
 	componentWillUpdate() {
-		UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
-		LayoutAnimation.easeInEaseOut();
+		if(Platform.OS === 'ios') {
+			LayoutAnimation.easeInEaseOut();
+		}
+	}
+
+	setDimensions(width,height) {
+		if (this.props.height === 0) {
+			this.setState({width:this.props.width+1});
+			this.setState({height:((this.props.width/width)*height+1)});
+		} else {
+			this.setState({width:((this.props.height/height)*width+1)});
+			this.setState({height:this.props.height+1});
+		}
 	}
 
 	componentWillMount() {
-		
-		Image.prefetch(this.props.source.uri);
-		Image.getSize(this.props.source.uri,(width,height)=>{
-			if (this.props.height === 0) {
-				this.setState({width:this.props.width+1});
-				this.setState({height:((this.props.width/width)*height+1)});
-			} else {
-				this.setState({width:((this.props.height/height)*width+1)});
-				this.setState({height:this.props.height+1});
-			}
-		},(error)=>{console.log(error)});
+		if(this.props.source.uri !== undefined) {
+			Image.getSize(this.props.source.uri,(width,height)=>{
+				this.setDimensions(width,height);
+			},(error)=>{console.log(error)});
+		} else {
+			let img = resolveAssetSource(this.props.source);
+			this.setDimensions(img.width,img.height);
+		}
 	}
 
 	render() {
-
 		return(
-			<View style={{alignItems:'center',justifyContent:'center',backgroundColor:'#fff'}}>
-				<View style={{width:this.state.width,height:this.state.height}}>
-					{this.props.lightbox ?
-						<TouchableWithoutFeedback onPress={()=>{this.navigate()}} > 
-							<Image resizeMode="cover" style={{width:this.state.width,height:this.state.height}} source={this.props.source}>
-								{this.props.children}
-							</Image>
-						</TouchableWithoutFeedback> :
+			<View style={{width:this.state.width,height:this.state.height,alignItems:'center',justifyContent:'center',backgroundColor:'#fff'}}>
+				{this.props.lightbox ?
+					<TouchableWithoutFeedback onPress={()=>{this.navigate()}} > 
 						<Image resizeMode="cover" style={{width:this.state.width,height:this.state.height}} source={this.props.source}>
 							{this.props.children}
 						</Image>
-					}
-				</View>
+					</TouchableWithoutFeedback> :
+					<Image resizeMode="cover" style={{width:this.state.width,height:this.state.height}} source={this.props.source}>
+						{this.props.children}
+					</Image>
+				}
 			</View>
 		);
 	}

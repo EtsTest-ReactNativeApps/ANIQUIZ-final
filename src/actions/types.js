@@ -13,3 +13,4 @@ export const SET_HINT = 'set_hint';
 export const RESET_ANSWER = 'reset_answer';
 export const SET_HINT_NUM = 'set_hint_num';
 export const DOWNLOAD = 'download';
+export const SET_KNOW_ANIME = 'set_know_anime';

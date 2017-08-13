@@ -3,9 +3,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { View } from 'react-native';
 import { SQLite, FileSystem } from 'expo';
 import { Router } from './Router';
-import { download } from './actions';
 import { connect } from 'react-redux';
-import { APP_READY, DOWNLOAD } from './actions/types';
+import { APP_READY } from './actions/types';
 import { addNavigationHelpers } from 'react-navigation';
 import cacheAssets from './../utilities/cacheAssets';
 //import { DB } from './../db';
@@ -34,31 +33,18 @@ class App extends Component {
 				Ionicons.font
 			]
 		});
+	}
+
+	async componentWillMount() {
+		await this.loadAssets();
+
 		this.props.dispatch({type:APP_READY});
-	}
-
-	async loadDB() {
-		this.makeSQLiteDirAsync();
-		await FileSystem.downloadAsync(
-		  'https://github.com/RE-N-Y/final/blob/master/db.db?raw=true',
-		  FileSystem.documentDirectory + 'SQLite/db.db'
-		);
-  	}
-
-	async makeSQLiteDirAsync() {
-	  	const dbTest = SQLite.openDatabase('key.db');
-	    await dbTest.transaction(tx => tx.executeSql(''));
-	}
-
-	componentWillMount() {
-		this.loadAssets();
-
 		/*DB.transaction(tx => {
 	      tx.executeSql(
 	        'drop table Q;'
 	      );
 	    });*/
-	    //this.loadDB();
+	    
 
 		/*DB.transaction(tx => {
 	      tx.executeSql(
@@ -70,6 +56,7 @@ class App extends Component {
 	render() {
 		return (
 			<View style={{flex:1}}>
+
 				{this.props.ready ? 
 					<Router
 						navigation={addNavigationHelpers({
@@ -85,7 +72,7 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-	return { nav: state.nav, ready: state.app.ready, download: state.main.download };
+	return { nav: state.nav, ready: state.app.ready };
 };
 
 export default connect(mapStateToProps)(App);

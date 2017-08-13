@@ -127,13 +127,14 @@ const styles = {
 	},
 	centerStyle: {
 		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
+		zIndex: 7,
+		elevation: 7
 	},
 	iconStyle: {
 		height: 21,
 		width: 21
 	}
-
 }
 
 export default Music;

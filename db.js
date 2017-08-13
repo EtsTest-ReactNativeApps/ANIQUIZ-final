@@ -1,4 +1,4 @@
 import { SQLite } from 'expo';
 
-export const DB = SQLite.openDatabase('db.db');
+export const DB = SQLite.openDatabase('anime.db');
 
