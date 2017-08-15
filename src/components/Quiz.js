@@ -30,8 +30,6 @@ class Quiz extends Component {
     	UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
     	if (nextState.answer !== this.state.answer) {
     		LayoutAnimation.easeInEaseOut();
-    	} else if (nextState.hint !== this.state.hint) {
-
     	} else {
     		LayoutAnimation.spring();
     	}
@@ -47,7 +45,7 @@ class Quiz extends Component {
 			}
 			if (this.state.answer !== answer) {
 				this.setState({answer});
-				this.props.checkAnswer(answer);
+				this.props.checkAnswer(answer,this.props.anime);
 				this.props.setHint(false);
 			} 
 		}

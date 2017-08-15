@@ -17,8 +17,8 @@ import {
 const INITIAL_STATE = {
 	selectedOptions: [],
 	answer: null,
-	correct: 0,
-	wrong: 0,
+	correct: [],
+	wrong: [],
 	time: -1,
 	deck: '',
 	mode: '',
@@ -33,15 +33,18 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
 	switch(action.type) {
 		case CHECK_ANSWER:
-			if (action.payload) {
-				return { ...state, answer: true, correct: state.correct+1}
+			const { correct, anime } = action.payload;
+			let temp = {};
+			temp[anime] = correct;
+			if (correct) {
+				return { ...state, answer: true, correct: [...state.correct,temp] }
 			} else {
-				return { ...state, answer: false, wrong: state.wrong+1}
+				return { ...state, answer: false, wrong: [...state.wrong,temp] }
 			}
 		case RESET_ANSWER:
 			return { ...state, answer: null }
 		case RESET_QUIZ:
-			return { ...state, correct: 0, wrong: 0 }
+			return { ...state, correct: [], wrong: []}
 		case SET_DECK:
 			return { ...state, deck: action.payload }
 		case SET_MODE:

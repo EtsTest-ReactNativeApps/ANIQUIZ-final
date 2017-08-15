@@ -47,15 +47,27 @@ class ResponsiveImage extends Component {
 	}
 
 	render() {
+		const styles = {
+			centerStyle: {
+				alignItems: 'center',
+				justifyContent: 'center',
+				backgroundColor: '#fff'
+			},
+			fixedStyle: {
+				width:this.state.width,
+				height:this.state.height
+			}
+		}
+
 		return(
-			<View style={{width:this.state.width,height:this.state.height,alignItems:'center',justifyContent:'center',backgroundColor:'#fff'}}>
+			<View style={styles.centerStyle}>
 				{this.props.lightbox ?
 					<TouchableWithoutFeedback onPress={()=>{this.navigate()}} > 
-						<Image resizeMode="cover" style={{width:this.state.width,height:this.state.height}} source={this.props.source}>
+						<Image resizeMode="cover" style={styles.fixedStyle} source={this.props.source}>
 							{this.props.children}
 						</Image>
 					</TouchableWithoutFeedback> :
-					<Image resizeMode="cover" style={{width:this.state.width,height:this.state.height}} source={this.props.source}>
+					<Image resizeMode="cover" style={styles.fixedStyle} source={this.props.source}>
 						{this.props.children}
 					</Image>
 				}

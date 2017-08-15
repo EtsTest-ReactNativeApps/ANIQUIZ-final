@@ -13,7 +13,7 @@ class StartScreen extends Component {
 				<View style={styles.launcherContainer}>
 					<Image style={styles.logoStyle} source={require('./../../assets/icons/logo.png')}/>
 					<Text style={styles.textStyle}>ANIQUIZ</Text>
-					<Pill onPress={()=>{this.props.downloaded ? this.props.navigate('pack') : this.props.navigate('tutorial') }}>START</Pill>
+					<Pill onPress={()=>{this.props.downloaded === 'empty' ? this.props.navigate('tutorial') : this.props.navigate('pack')}}>START</Pill>
 				</View>
 			</Image>
 		);

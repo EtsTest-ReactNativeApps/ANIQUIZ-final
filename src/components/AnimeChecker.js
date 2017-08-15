@@ -5,7 +5,7 @@ import ResponsiveImage from './../common/ResponsiveImage';
 import { connect } from 'react-redux';
 import { animeList } from './../reducers/AnimeList';
 import { ANIMES } from './../../assets/animes/animes';
-import { setKnowAnime, navigate, download } from './../actions';
+import { setKnowAnime, navigate, download, back } from './../actions';
 
 class AnimeChecker extends Component {
 
@@ -71,7 +71,7 @@ class AnimeChecker extends Component {
 					<View style={checkerContainerStyle}>
 						<Checker know={true} onPress={()=>{this.checkAll(true)}}/>
 					</View>
-					<Pill onPress={()=>{this.props.download('downloading')}}>FINISHED!</Pill>
+					<Pill onPress={()=>{this.props.downloaded === 'reconfigure' ? this.props.back():this.props.download('downloading')}}>FINISHED!</Pill>
 					<View style={checkerContainerStyle}>
 						<Checker know={false} onPress={()=>{this.checkAll(false)}}/>
 					</View>
@@ -120,7 +120,7 @@ const mapStateToProps = (state) => {
 		animes[anime] = state.main[anime];
 	}
 
-	return {animes};
+	return {animes, downloaded: state.main.downloaded };
 }
 
-export default connect(mapStateToProps,{setKnowAnime,navigate,download})(AnimeChecker);
+export default connect(mapStateToProps,{setKnowAnime,navigate,download,back})(AnimeChecker);

@@ -3,5 +3,5 @@ export const animeList = {
 	"Barakamon": false,
 	"Black Bullet": false,
 	"Noragami": false,
-	"Monogatari Series-Second Season":false, 
+	"Monogatari Series":false, 
 };

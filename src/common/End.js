@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Dimensions } from 'react-native';
 import { Skewed } from './Skewed';
 import { connect } from 'react-redux';
-import { back } from './../actions';
+import { back, updateTotal } from './../actions';
 import { Pill } from './Pill';
 import Download from './../components/Download';
 import AnimeChecker from './../components/AnimeChecker';
@@ -48,6 +48,13 @@ const End = (props) => {
 			fontSize: (WIDTH > 700 ? 32 : 17),
 			textAlign: 'center',
 			fontFamily: 'Avenir-Medium'
+		},
+		textStyle: {
+			fontFamily: 'Avenir-Light',
+			fontSize: 24,
+			color: '#fff',
+			textAlign: 'center',
+			backgroundColor: 'transparent'
 		}
 	};
 
@@ -55,14 +62,15 @@ const End = (props) => {
 		endContainerStyle,
 		quoteStyle,
 		quoteContainerStyle,
-		quoterStyle
+		quoterStyle,
+		textStyle
 	} = styles;
 
 	//Add Download Section
 	
 	//not using !props.downloaded since it should also work when props.downloaded is null
 
-	if (props.downloaded !== 'complete') {
+	if (props.downloaded !== 'complete' || props.downloaded !== 'reconfigure') {
 		return (
 			<View style={[endContainerStyle,{marginLeft:0,marginTop:-35,backgroundColor:'transparent'}]}>
 				<AnimeChecker/>
@@ -72,25 +80,29 @@ const End = (props) => {
 		return (
 			<View style={endContainerStyle}>
 				<View>
-					<Skewed width={WIDTH} height={HEIGHT}>
-						RESULT
+					<Skewed width={WIDTH} height={HEIGHT*0.25}>
+						<Text style={textStyle}>RESULT</Text>
 					</Skewed>
 					<View style={{alignItems:'center'}}>
-						<Graph/>
+						<Graph end text="CORRECT"/>
 					</View>
 					<View style={quoteContainerStyle}>
 						<Text style={quoteStyle}>I'm Haruhi Suzumiya, from East Junior High. First off, I'm not interested in ordinary people. But, if any of you are aliens, time-travelers, or espers, please come see me. That is all!</Text>
 						<Text style={quoterStyle}>-Haruhi Suzumiya</Text>
 					</View>
 				</View>
-				<Pill onPress={()=>{props.back()}}>FINISHED</Pill>
+				<Pill onPress={()=>{
+					props.back();
+					props.updateTotal(props.correct,props.wrong);
+				}}>FINISHED</Pill>
 			</View>
 		);
 	}	
 }
 
-const mapStateToProps = ({main}) => {
-	return { downloaded: main.downloaded }
+const mapStateToProps = (state) => {
+	const { correct, wrong } = state.quiz;
+	return { downloaded: state.main.downloaded, correct, wrong }
 };
 
-export default connect(mapStateToProps,{back})(End);
+export default connect(mapStateToProps,{back,updateTotal})(End);

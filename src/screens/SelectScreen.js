@@ -23,13 +23,14 @@ class SelectScreen extends Component {
 			textStyle,
 			xStlye,
 			closeStyle,
-			fixStyle
+			fixStyle,
+			titleStyle
 		} = styles;
 
 		return (
 			<View style={fixStyle}>
-				<Skewed width={Dimensions.get('window').width} height={Dimensions.get('window').height}>{this.props.deck}</Skewed>
-				<View style={{width: Dimensions.get('window').width, height: Dimensions.get('window').height*0.75}}>
+				<Skewed width={Dimensions.get('window').width+40} height={Dimensions.get('window').height*0.30}><Text style={titleStyle}>{this.props.deck}</Text></Skewed>
+				<View style={{width: Dimensions.get('window').width, height: Dimensions.get('window').height*0.70}}>
 					<View style={[sectionStyle,centerStyle]}>
 						<TouchableOpacity style={centerStyle} onPress={()=>{this.navigate('Time')}}>
 							<Image style={imageStyle} source={require('./../../assets/icons/time.png')}/>
@@ -63,6 +64,13 @@ const styles = {
 		fontSize: 24,
 		color: '#333',
 		textAlign: 'center'
+	},
+	titleStyle: {
+		fontFamily: 'Avenir-Light',
+		fontSize: 24,
+		color: '#fff',
+		textAlign: 'center',
+		backgroundColor: 'transparent'
 	},
 	imageStyle: {
 		height: 95,

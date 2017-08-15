@@ -11,7 +11,7 @@ class TutorialScreen extends Component {
 
 	render() {
 		let pack = [{id:'1',img:require('./../../assets/backgrounds/t1.png')},{id:'2',img:require('./../../assets/backgrounds/t2.png')},{id:'3',img:require('./../../assets/backgrounds/t3.png')},{id:'4',img:require('./../../assets/backgrounds/t4.png')},{id:'5',img:require('./../../assets/backgrounds/t5.png')}];
-		let condition = this.props.index >= pack.length;
+		let condition = this.props.index >= pack.length || this.props.downloaded === 'reconfigure';
 		return(
 			<Image style={styles.imageStyle} blurRadius={3} source={require('./../../assets/backgrounds/1.png')}>
 				<View style={styles.backgroundStyle}></View>
@@ -37,12 +37,13 @@ class TutorialScreen extends Component {
 			            />
 		            </View>
 	            </View>
-	            {this.props.downloaded === 'downloading' || this.props.downloaded === 'downloaded' ? 
-	            	<View style={[styles.downloadStyle,{backgroundColor: this.props.downloaded === 'downloaded' ? '#45B39C' : '#fff'}]}>
-	            		<Download/>
+	            {this.props.downloaded !== 'reconfigure' && this.props.downloaded !== 'empty' ? 
+	            	<View style={[styles.downloadStyle,{backgroundColor: this.props.downloaded === 'downloaded' || this.props.downloaded === 'complete'? '#45B39C' : '#fff'}]}>
+	            		<Download />
 	            	</View> 
 	            : null}
 			</Image>
+			// 'empty'=>'downloading'=>'downloaded'=>'complete'
 		);
 	}
 }

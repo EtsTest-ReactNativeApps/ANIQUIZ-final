@@ -16,10 +16,10 @@ import {
 
 let timer = null;
 
-export const checkAnswer = (correct) => {
+export const checkAnswer = (correct,anime) => {
 	return {
 		type: CHECK_ANSWER,
-		payload: correct
+		payload: {correct,anime}
 	}
 }
 

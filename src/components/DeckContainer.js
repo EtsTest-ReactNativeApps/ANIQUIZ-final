@@ -55,13 +55,15 @@ class DeckContainer extends Component {
       DB.transaction(tx => {
         tx.executeSql('select * from Q where category = ?;', [this.props.deck.toLowerCase()], (_, { rows: { _array } }) => {
 
-              for (var i = 0; i < _array.length; i++) {
-                let source = [];
-                let music = this.props.deck === 'Music' ? MUSIC[parseInt(_array[i].music)-1] : null;
+              let query = _array.reverse();
 
-                for (var j = 0; j < _array[i].source.split(',').length; j++) {
-                  if (_array[i].source.split(',')[j] !== 'null') {
-                    source.push({uri:'data:image/jpeg;base64,'+_array[i].source.split(',')[j]});
+              for (var i = 0; i < query.length; i++) {
+                let source = [];
+                let music = this.props.deck === 'Music' ? MUSIC[parseInt(query[i].music)-1] : null;
+
+                for (var j = 0; j < query[i].source.split(',').length; j++) {
+                  if (query[i].source.split(',')[j] !== 'null') {
+                    source.push({uri:'data:image/jpeg;base64,'+query[i].source.split(',')[j]});
                   }
                 }
 
@@ -70,7 +72,18 @@ class DeckContainer extends Component {
                   //music default image
                 }
 
-                store.push( { ..._array[i], id:(i+1), title:('Question '+(i+1)), options:_array[i].options.split(','), answers:_array[i].answers.split(','), source, music } );
+                store.push( 
+                  { 
+                    ...query[i], 
+                    id:(i+1), 
+                    title:('Question '+(i+1)), 
+                    options:query[i].options.split(','), 
+                    answers:query[i].answers.split(','), 
+                    source, music,
+                    anime: query[i].anime 
+                  } 
+                );
+
                 this.setState({pack:store});
               }
             }
@@ -119,6 +132,7 @@ class DeckContainer extends Component {
                       answers={item.answers}
                       source={item.source}
                       music={item.music}
+                      anime={item.anime}
                     />
                   </Animated.View>
                   );
@@ -139,7 +153,7 @@ class DeckContainer extends Component {
 const mapStateToProps = (state) => {
   const { correct, wrong, mode, deck, index, time } = state.quiz;
 
-  return { correct, wrong, mode, deck, index, time };
+  return { correct: correct.length, wrong: wrong.length, mode, deck, index, time };
 }
 
 export default connect(mapStateToProps,{setHintNum})(DeckContainer);
