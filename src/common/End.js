@@ -70,7 +70,7 @@ const End = (props) => {
 	
 	//not using !props.downloaded since it should also work when props.downloaded is null
 
-	if (props.downloaded !== 'complete' || props.downloaded !== 'reconfigure') {
+	if (props.downloaded !== 'complete' && props.downloaded !== 'reconfigure') {
 		return (
 			<View style={[endContainerStyle,{marginLeft:0,marginTop:-35,backgroundColor:'transparent'}]}>
 				<AnimeChecker/>

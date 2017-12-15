@@ -9,10 +9,12 @@ import LightBoxScreen from './screens/LightBoxScreen';
 import TutorialScreen from './screens/TutorialScreen';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 
+//no header for stack navigator
 const stackNavigatorOption = {
 	headerMode: 'none'
 };
 
+//config for tabNavigation
 const tabNavigatorOption = {
 	animationEnabled: true,
 	swipeEnabled: false,
@@ -32,6 +34,23 @@ const tabNavigatorOption = {
 	}
 };
 
+/**
+	-----Router structure------
+	-Router/
+		-Start
+		-Tutorial
+		-Main/
+			-Status
+			-Achievement
+			-Pack/
+				-Deck
+				-Mode/
+					-Select
+					-Quiz/
+						-Quiz
+						-Lightbox
+	------Router structure------
+**/
 const Quiz = StackNavigator({
 	quiz: { screen: QuizScreen },
 	lightbox: { screen: LightBoxScreen }
@@ -59,4 +78,7 @@ const Router = StackNavigator({
 	}
 },stackNavigatorOption);
 
+//start->pack->mode->quiz
+
+//export Router
 export { Router };

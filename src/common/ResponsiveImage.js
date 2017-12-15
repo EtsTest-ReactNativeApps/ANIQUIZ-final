@@ -36,7 +36,9 @@ class ResponsiveImage extends Component {
 	}
 
 	componentWillMount() {
-		if(this.props.source.uri !== undefined) {
+		if (this.props.source === undefined) {
+			return;
+		} else if(this.props.source.uri !== undefined) {
 			Image.getSize(this.props.source.uri,(width,height)=>{
 				this.setDimensions(width,height);
 			},(error)=>{console.log(error)});

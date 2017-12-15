@@ -10,6 +10,7 @@ import cacheAssets from './../utilities/cacheAssets';
 //import { DB } from './../db';
 
 class App extends Component {
+	//loadAsset method, uses import from utilities
 	async loadAssets() {
 		await cacheAssets({
 			images: [
@@ -36,8 +37,9 @@ class App extends Component {
 	}
 
 	async componentWillMount() {
+		//first wait until asset is loaded
 		await this.loadAssets();
-
+		//then, dispatch an action to make the app ready to start!
 		this.props.dispatch({type:APP_READY});
 		/*DB.transaction(tx => {
 	      tx.executeSql(
@@ -52,11 +54,11 @@ class App extends Component {
 	      );
 	    });*/
 	}
-
+	
 	render() {
+		//return Router when app is ready
 		return (
 			<View style={{flex:1}}>
-
 				{this.props.ready ? 
 					<Router
 						navigation={addNavigationHelpers({

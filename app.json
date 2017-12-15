@@ -1,11 +1,11 @@
 {
   "expo": {
     "name": "aniquiz",
-    "description": "An empty new project",
+    "description": "aniquiz project",
     "slug": "aniquiz",
     "privacy": "public",
     "sdkVersion": "19.0.0",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "orientation": "portrait",
     "primaryColor": "#cccccc",
     "icon": "./assets/icons/app-icon.png",
@@ -17,7 +17,11 @@
       "assetExts": ["ttf", "mp4"]
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.onosura.aniquiz"
+    },
+    "android": {
+      "package": "com.onosura.aniquiz"
     }
   }
 }

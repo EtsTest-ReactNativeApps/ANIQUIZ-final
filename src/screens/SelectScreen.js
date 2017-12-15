@@ -29,7 +29,10 @@ class SelectScreen extends Component {
 
 		return (
 			<View style={fixStyle}>
-				<Skewed width={Dimensions.get('window').width+40} height={Dimensions.get('window').height*0.30}><Text style={titleStyle}>{this.props.deck}</Text></Skewed>
+				<View style={centerStyle}>
+					<Skewed width={Dimensions.get('window').width} height={Dimensions.get('window').height*0.30}><Text style={titleStyle}>{this.props.deck}</Text></Skewed>
+				</View>
+				
 				<View style={{width: Dimensions.get('window').width, height: Dimensions.get('window').height*0.70}}>
 					<View style={[sectionStyle,centerStyle]}>
 						<TouchableOpacity style={centerStyle} onPress={()=>{this.navigate('Time')}}>

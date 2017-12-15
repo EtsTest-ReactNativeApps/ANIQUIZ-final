@@ -9,17 +9,21 @@ import { setKnowAnime, navigate, download, back } from './../actions';
 
 class AnimeChecker extends Component {
 
+	//onPress handler, sets value of anime to opposite when pressed
 	onPress(anime) {
 		this.props.setKnowAnime(anime,!this.props.animes[anime]);
 	}
 
+	//change all of the value of anime to parameter 'value'
 	checkAll(value) {
 		for(var anime in animeList) {
 			this.props.setKnowAnime(anime,value);
 		}
 	}
 
+	//render method for one anime
 	renderAnime(anime) {
+		//styles
 		const {
 			textStyle,
 			cardStyle,
@@ -55,6 +59,7 @@ class AnimeChecker extends Component {
 			checkerContainerStyle
 		} = styles;
 
+		//Pill is added with onpress handler that either goes back when in reconfigure mode or navigates to download page
 		return (
 			<Card style={{backgroundColor:'transparent',marginTop:20}}>
 				<View style={containerStyle}>

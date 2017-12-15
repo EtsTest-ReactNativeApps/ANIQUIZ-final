@@ -8,6 +8,8 @@ import Quiz from './Quiz';
 import { MUSIC } from './../../assets/packs/music/music';
 import { DB } from './../../db';
 
+/*Dummy Data*/
+
 /*let pack = [
   { id: 1, title: 'Question 1', question: 'What is the name of this music?', options:['Kino','Tsugumi Seishiro','DEATH THE KID','Riza Hawkeye','Alucard'], answers:['Tsugumi Seishiro'], source:[require('./../../assets/packs/character/6.png'),require('./../../assets/packs/character/5.png')]},
   { id: 2, title: 'Question 2', question: 'What is the name of this music?', options:['A','B','C','D','E'], answers:['C'], source:[require('./../../assets/packs/character/4.png'),require('./../../assets/packs/character/3.png')]},
