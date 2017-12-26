@@ -57,7 +57,7 @@ class DeckContainer extends Component {
       DB.transaction(tx => {
         tx.executeSql('select * from Q where category = ?;', [this.props.deck.toLowerCase()], (_, { rows: { _array } }) => {
 
-              let query = _array.reverse();
+              let query = _array;
 
               for (var i = 0; i < query.length; i++) {
                 let source = [];
@@ -85,7 +85,6 @@ class DeckContainer extends Component {
                     anime: query[i].anime 
                   } 
                 );
-
                 this.setState({pack:store});
               }
             }

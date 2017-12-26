@@ -40,12 +40,13 @@ class Questions extends Component {
 
 		return (
 			<View>
-				{this.state.questions.map(({id,question,options,answers})=>{
+				{this.state.questions.map(({id,question,options,answers,anime})=>{
 					return (
 						<TouchableOpacity onLongPress={()=>{this.onPress(id)}} key={id} style={{padding:10,borderColor:'#333',borderWidth:2}}>
 							<Text>{question}</Text>
 							<Text>{options}</Text>
 							<Text>{answers}</Text>
+							<Text>{anime}</Text>
 						</TouchableOpacity>
 					);
 				})}
