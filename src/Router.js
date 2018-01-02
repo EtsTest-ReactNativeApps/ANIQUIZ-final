@@ -72,8 +72,7 @@ const Router = StackNavigator({
 	main: {
 		screen: TabNavigator({
 			status: { screen: StatusScreen },
-			pack: { screen: Pack },
-			achievement: { screen: AchievementScreen }
+			pack: { screen: Pack }
 		},tabNavigatorOption)
 	}
 },stackNavigatorOption);

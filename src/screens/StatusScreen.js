@@ -95,7 +95,14 @@ class StatusScreen extends Component {
 							<View style={[labelStyle,{backgroundColor:'#D0011B'}]}/>
 						</View>
 					</View>
-					<Skewed width={Dimensions.get('window').width} height={Dimensions.get('window').height*0.7} flip={true}>
+					
+				</View>
+			</ScrollView>
+		);
+	}
+}
+
+				/*<Skewed width={Dimensions.get('window').width} height={Dimensions.get('window').height*0.7} flip={true}>
 						<View style={[shadowStyle,{marginBottom:5,marginTop:10}]}>
 							<ResponsiveImage width={Dimensions.get('window').width*0.45} height={0} source={ANIMES[max]}/>
 						</View>
@@ -117,12 +124,7 @@ class StatusScreen extends Component {
 					<View style={[containerStyle,{padding:15}]}>
 						<Text style={[scoreSubtextStyle,{color:'#333',opacity:1,marginBottom:10}]}>Want to reconfigure your animes?</Text>
 						<Pill onPress={()=>{this.props.navigate('tutorial');this.props.download('reconfigure');}}>UPDATE</Pill>
-					</View>
-				</View>
-			</ScrollView>
-		);
-	}
-}
+					</View>*/
 
 const styles = {
 	containerStyle: {
