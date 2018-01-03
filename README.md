@@ -1,8 +1,8 @@
 # **Final Aniquiz Project**
 
-This is a repository that contains the development code for Aniquiz. Aniquiz is an offline based mobile quiz application that I have been developing by myself for last few month. The initial devleopment code for aniquiz is in quiz directory, which uses a Meteor.js backend.
-However, as Meteor.js converts web apps to mobile apps using WebView, I decided to change it to ReactNative backend
-for better native design integration for mobile and user experience. The UI was designed using Sketch and Invisionapp.
+This is a repository that contains the development code for Aniquiz. Aniquiz is an offline based mobile quiz application that I have been developing by myself for last few month. The initial devleopment code for aniquiz is in quiz directory, which uses a **Meteor.js** backend.
+However, as Meteor.js converts web apps to mobile apps using WebView, I decided to change it to **React Native framework**
+for better native design integration for mobile and user experience. The project is currently at testing stage with first signed APK already produced with **Expo React Native IDE**. The UI was designed using Sketch and Invisionapp.
 
 ## **Features of Aniquiz**
    Here are some main features of aniquiz
