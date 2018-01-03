@@ -59,3 +59,8 @@ for better native design integration for mobile and user experience. The UI was 
   ### Result Screen
   
   ![alt text](https://github.com/RE-N-Y/RE-N-Y.github.io/blob/master/img/Final%20Result%20Screen.png)
+  
+  
+  ## Demo Video
+  
+  ![alt text](https://github.com/RE-N-Y/RE-N-Y.github.io/blob/master/img/Aniquiz_Demo.gif)
