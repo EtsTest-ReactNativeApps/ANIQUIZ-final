@@ -46,7 +46,7 @@ for better native design integration for mobile and user experience. The UI was 
   
   ### Mode Selection Screen
   
-  [!alt text](https://github.com/RE-N-Y/RE-N-Y.github.io/blob/master/img/Mode%20Selection%20Screen.png)
+  ![alt text](https://github.com/RE-N-Y/RE-N-Y.github.io/blob/master/img/Mode%20Selection%20Screen.png)
   
   ### Normal Mode
   
