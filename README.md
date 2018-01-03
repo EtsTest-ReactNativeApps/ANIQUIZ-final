@@ -1,10 +1,8 @@
 # **Final Aniquiz Project**
 
-Well, long story short. This is a repository that contains the development code for Aniquiz.
-Aniquiz is an off-line based mobile quiz application that I have been developing by myself for last few month.
-The initial devleopment code for aniquiz is in quiz directory, which uses a Meteor.js backend.
+This is a repository that contains the development code for Aniquiz. Aniquiz is an offline based mobile quiz application that I have been developing by myself for last few month. The initial devleopment code for aniquiz is in quiz directory, which uses a Meteor.js backend.
 However, as Meteor.js converts web apps to mobile apps using WebView, I decided to change it to ReactNative backend
-for better native design integration for mobile and user experience.
+for better native design integration for mobile and user experience. The UI was designed using Sketch and Invisionapp.
 
 ## **Features of Aniquiz**
    Here are some main features of aniquiz
@@ -35,3 +33,29 @@ for better native design integration for mobile and user experience.
       
   So that is the summary of the features of aniquiz. Feel free to look at ReactNative code! It is based on Expo IDE, so if you want to
   run it you might have to download Expo to check it out.
+  
+  ## Screenshots
+  
+  ### Starting Screen
+  
+  ![alt text](https://github.com/RE-N-Y/RE-N-Y.github.io/blob/master/img/Starting%20Page.png)
+  
+  ### Status Screen
+  
+  ![alt text](https://github.com/RE-N-Y/RE-N-Y.github.io/blob/master/img/Status%20Screen.png)
+  
+  ### Mode Selection Screen
+  
+  [!alt text](https://github.com/RE-N-Y/RE-N-Y.github.io/blob/master/img/Mode%20Selection%20Screen.png)
+  
+  ### Normal Mode
+  
+  ![alt text](https://github.com/RE-N-Y/RE-N-Y.github.io/blob/master/img/Normal%20mode.png)
+  
+  ### Music Screen
+
+  ![alt text](https://github.com/RE-N-Y/RE-N-Y.github.io/blob/master/img/Music%20deck%20quesiton%20screen.png)
+  
+  ### Result Screen
+  
+  ![alt text](https://github.com/RE-N-Y/RE-N-Y.github.io/blob/master/img/Final%20Result%20Screen.png)
