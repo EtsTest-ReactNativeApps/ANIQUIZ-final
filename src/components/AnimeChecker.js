@@ -61,25 +61,10 @@ class AnimeChecker extends Component {
 
 		//Pill is added with onpress handler that either goes back when in reconfigure mode or navigates to download page
 		return (
-			<Card style={{backgroundColor:'transparent',marginTop:20}}>
+			<Card style={{backgroundColor:'transparent'}}>
 				<View style={containerStyle}>
-					<FlatList
-						data={Object.keys(this.props.animes)}
-						renderItem={({item})=>{return this.renderAnime(item)}}
-						keyExtractor={(item)=>item}
-						numColumns={2}
-						columnWrapperStyle={galleryViewStyle}
-						initialNumToRender={4}
-					/>
-				</View>
-				<View style={footerStyle}>
-					<View style={checkerContainerStyle}>
-						<Checker know={true} onPress={()=>{this.checkAll(true)}}/>
-					</View>
-					<Pill onPress={()=>{this.props.downloaded === 'reconfigure' ? this.props.back():this.props.download('downloading')}}>FINISHED!</Pill>
-					<View style={checkerContainerStyle}>
-						<Checker know={false} onPress={()=>{this.checkAll(false)}}/>
-					</View>
+					<Text style={textStyle}>So you ready to go?</Text>
+					<Pill onPress={()=>{this.props.downloaded === 'reconfigure' ? this.props.back():this.props.download('downloading')}}>Let's Go!</Pill>
 				</View>
 			</Card>
 		);
@@ -90,6 +75,9 @@ const styles = {
 	containerStyle: {
 		width:Dimensions.get('window').width,
 		height:Dimensions.get('window').height-60,
+		flex:1,
+		justifyContent:'center',
+		alignItems:'center',
 	},
 	galleryViewStyle: {
 		justifyContent:'space-around'
@@ -97,8 +85,8 @@ const styles = {
 	textStyle: {
 		fontFamily: 'Avenir-Heavy',
 		color: '#fff',
-		fontSize: 15,
-		marginTop: 5,
+		fontSize: 20,
+		marginBottom: 10,
 	},
 	cardStyle: {
 		backgroundColor: 'transparent',

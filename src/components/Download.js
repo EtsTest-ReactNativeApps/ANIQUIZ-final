@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { View, Text, Image, ActivityIndicator, TouchableOpacity, AsyncStorage } from 'react-native';
 import { SQLite, FileSystem } from 'expo';
 import { Loading } from './../common';
 import { connect } from 'react-redux';
@@ -11,16 +11,36 @@ class Download extends Component {
 		super();
 
 		this.state = {
-			error: false
+			error: false,
+			downloadProgress: 0
 		}
 	}
 
 	async loadDB() {
 		await this.makeSQLiteDirAsync();
-		await FileSystem.downloadAsync(
+
+		const callback = downloadProgress => {
+		  const progress =
+		    downloadProgress.totalBytesWritten /
+		    downloadProgress.totalBytesExpectedToWrite;
+		  this.setState({
+		    downloadProgress: progress,
+		  });
+		};
+
+		const downloadResumable = FileSystem.createDownloadResumable(
 		  'https://github.com/RE-N-Y/final/blob/master/db.db?raw=true',
-		  FileSystem.documentDirectory + 'SQLite/anime.db'
+		  FileSystem.documentDirectory + 'SQLite/anime.db',
+		  {},
+		  callback
 		);
+
+		try {
+		  const { uri } = await downloadResumable.downloadAsync();
+		  console.log('Finished downloading to ', uri);
+		} catch (e) {
+		  this.handleDownloadError();
+		};
 
 		const message = await FileSystem.getInfoAsync(FileSystem.documentDirectory+'SQLite/anime.db');
 		const db = await SQLite.openDatabase('anime.db');
@@ -33,8 +53,14 @@ class Download extends Component {
 	            //console.log(JSON.stringify(rows));
 	          }
 	        );
-      	},(error)=>{this.setState({error:true});alert('An Error has occured, please restart the app.')},()=>{this.props.download('downloaded')});
-		
+      	},  ()=>{this.handleDownloadError()},
+      		()=>{this.props.download('downloaded');
+      	});
+  	}
+
+  	handleDownloadError() {
+  		this.setState({error:true});
+  		alert("Your network is currently disconnected or have a poor connection. Please, restart the app once you acquire a secure connection.");
   	}
 
 	async makeSQLiteDirAsync() {
@@ -71,6 +97,7 @@ class Download extends Component {
 						<View style={styles.downloadContainerStyle}>
 							<View style={styles.viewStyle}>
 								<ActivityIndicator size="large"/>
+								<Text style={styles.progressStyle}>{Math.round(this.state.downloadProgress*100)}%</Text>
 							</View>
 							<View style={{flex:1, justifyContent:'flex-end'}}>
 								<Loading/>
@@ -101,6 +128,12 @@ const styles = {
 		fontSize: 20,
 		color:'#fff',
 		marginTop:5
+	},
+	progressStyle: {
+		fontFamily: 'Avenir-Light',
+		fontSize: 15,
+		color:'#000',
+		opacity: 0.5
 	}
 }
 

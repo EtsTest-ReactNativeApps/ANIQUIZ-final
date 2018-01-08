@@ -7,7 +7,7 @@ import ResponsiveImage from './../common/ResponsiveImage';
 import Music from './../components/Music';
 import Hint from './../common/Hint';
 
-const CARD_WIDTH = Dimensions.get('window').width - 10;
+const CARD_WIDTH = Dimensions.get('window').width;
 const CARD_HEIGHT = Dimensions.get('window').height - 100;
 
 class Quiz extends Component {
@@ -122,7 +122,8 @@ class Quiz extends Component {
 				fontFamily: 'Avenir-Heavy',
 				color: '#fff',
 				fontSize: 25,
-				textAlign: 'center'
+				textAlign: 'center',
+				margin: 3
 			},
 			questionStyle: {
 				fontFamily: 'Avenir-Medium',
@@ -149,6 +150,7 @@ class Quiz extends Component {
 				color: '#333',
 				fontSize: 20,
 				textAlign: 'center',
+				margin: 5
 			},
 			optionStyle: {
 				flex: 1,
@@ -157,7 +159,7 @@ class Quiz extends Component {
 				borderColor: 'rgba(0,0,0,0.05)',
 				justifyContent: 'center',
 				alignItems: 'center',
-				backgroundColor: 'transparent'
+				backgroundColor: 'transparent',
 			},
 			cardStyle: {
 				height: CARD_HEIGHT,

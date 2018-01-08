@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, Dimensions, Animated } from 'react-native';
+import { View, Text, ImageBackground, Dimensions, Animated } from 'react-native';
 import { connect } from 'react-redux';
 import { navigate, download } from './../actions';
 import Swiper from './../components/Swiper';
@@ -13,7 +13,7 @@ class TutorialScreen extends Component {
 		let pack = [{id:'1',img:require('./../../assets/backgrounds/t1.png')},{id:'2',img:require('./../../assets/backgrounds/t2.png')},{id:'3',img:require('./../../assets/backgrounds/t3.png')},{id:'4',img:require('./../../assets/backgrounds/t4.png')},{id:'5',img:require('./../../assets/backgrounds/t5.png')}];
 		let condition = this.props.index >= pack.length || this.props.downloaded === 'reconfigure';
 		return(
-			<Image style={styles.imageStyle} blurRadius={3} source={require('./../../assets/backgrounds/1.png')}>
+			<ImageBackground style={styles.imageStyle} blurRadius={3} source={require('./../../assets/backgrounds/1.png')}>
 				<View style={styles.backgroundStyle}></View>
 				<View style={styles.launcherContainer}>
 					<View style={{width:Dimensions.get('window').width,height:Dimensions.get('window').height,marginTop:65}}>
@@ -42,7 +42,7 @@ class TutorialScreen extends Component {
 	            		<Download />
 	            	</View> 
 	            : null}
-			</Image>
+			</ImageBackground>
 			// 'empty'=>'downloading'=>'downloaded'=>'complete'
 		);
 	}

@@ -54,7 +54,7 @@ export default (state = INITIAL_STATE, action) => {
 				return { ...state, time: state.time -1 }
 			}
 		case SET_TIMER:
-			return { ...state, time: 180 }
+			return { ...state, time: 30 }
 		case STOP_TIMER:
 			return { ...state, time: -1 }
 		case LIGHTBOX:

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, Platform, TouchableWithoutFeedback, LayoutAnimation } from 'react-native';
+import { View, Image, Platform, TouchableWithoutFeedback, LayoutAnimation, ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
 import { navigate, selectLightboxImage } from './../actions';
 import resolveAssetSource from 'resolveAssetSource';
@@ -65,13 +65,13 @@ class ResponsiveImage extends Component {
 			<View style={styles.centerStyle}>
 				{this.props.lightbox ?
 					<TouchableWithoutFeedback onPress={()=>{this.navigate()}} > 
-						<Image resizeMode="cover" style={styles.fixedStyle} source={this.props.source}>
+						<ImageBackground resizeMode="cover" style={styles.fixedStyle} source={this.props.source}>
 							{this.props.children}
-						</Image>
+						</ImageBackground>
 					</TouchableWithoutFeedback> :
-					<Image resizeMode="cover" style={styles.fixedStyle} source={this.props.source}>
+					<ImageBackground resizeMode="cover" style={styles.fixedStyle} source={this.props.source}>
 						{this.props.children}
-					</Image>
+					</ImageBackground>
 				}
 			</View>
 		);

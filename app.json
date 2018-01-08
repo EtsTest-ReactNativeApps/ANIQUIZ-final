@@ -4,24 +4,30 @@
     "description": "aniquiz project",
     "slug": "aniquiz",
     "privacy": "public",
-    "sdkVersion": "19.0.0",
-    "version": "0.0.1",
+    "sdkVersion": "24.0.0",
+    "version": "0.0.2",
     "orientation": "portrait",
     "primaryColor": "#cccccc",
     "icon": "./assets/icons/app-icon.png",
-    "loading": {
-      "icon": "./assets/icons/loading-icon.png",
-      "hideExponentText": false
+    "splash": {
+      "image": "./assets/icons/app-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#4a5ae2"
+    },
+    "androidStatusBar": {
+      "barStyle": "light-content"
     },
     "packagerOpts": {
       "assetExts": ["ttf", "mp4"]
     },
     "ios": {
-      "supportsTablet": true,
+      "supportsTablet": false,
       "bundleIdentifier": "com.onosura.aniquiz"
     },
     "android": {
-      "package": "com.onosura.aniquiz"
+      "package": "com.onosura.aniquiz",
+      "permissions":["MANAGE_DOCUMENTS","READ_EXTERNAL_STORAGE","READ_INTERNAL_STORAGE","WRITE_EXTERNAL_STORAGE"],
+      "versionCode": 2
     }
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Dimensions, Image } from 'react-native';
+import { View, Text, Dimensions, ImageBackground } from 'react-native';
 import ResponsiveImage from './ResponsiveImage';
 
 const Skewed = (props) => {
@@ -69,13 +69,13 @@ const Skewed = (props) => {
 				width={props.width}
 				height={props.height}
 			>
-				<Image style={imageStyle} source={require('./../../assets/backgrounds/6.jpg')} resizeMode="cover">
+				<ImageBackground style={imageStyle} source={require('./../../assets/backgrounds/6.jpg')} resizeMode="cover">
 					<View style={backgroundStyle}>
 						<View style={viewStyle}>
 							{props.children}
 						</View>
 					</View>
-				</Image>
+				</ImageBackground>
 				<View style={[triangleCorner,(props.flip ? flipedTriangle : {})]}/>
 			</View>
 		</View>

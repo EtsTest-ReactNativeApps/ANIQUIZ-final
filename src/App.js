@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { View } from 'react-native';
+import { View, BackHandler } from 'react-native';
 import { SQLite, FileSystem } from 'expo';
 import { Router } from './Router';
 import { connect } from 'react-redux';
 import { APP_READY } from './actions/types';
-import { addNavigationHelpers } from 'react-navigation';
+import { addNavigationHelpers, NavigationActions } from 'react-navigation';
 import cacheAssets from './../utilities/cacheAssets';
 //import { DB } from './../db';
 
@@ -41,18 +41,13 @@ class App extends Component {
 		await this.loadAssets();
 		//then, dispatch an action to make the app ready to start!
 		this.props.dispatch({type:APP_READY});
-		/*DB.transaction(tx => {
-	      tx.executeSql(
-	        'drop table Q;'
-	      );
-	    });*/
-	    
+	}
 
-		/*DB.transaction(tx => {
-	      tx.executeSql(
-	        'create table if not exists Q (id integer primary key not null, question text, options text, answers text, source text, music text, anime text, category text);'
-	      );
-	    });*/
+	componentDidMount() {
+		BackHandler.addEventListener("hardwareBackPress",()=>{
+			this.props.dispatch(NavigationActions.back());
+			return true;
+		});
 	}
 	
 	render() {

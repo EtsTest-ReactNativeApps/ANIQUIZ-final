@@ -18,14 +18,14 @@ class Music extends Component {
 
 	async componentWillMount() {
 		let music =  new Audio.Sound();
-		await music.setCallback(this.callback);
+		await music.setOnPlaybackStatusUpdate(this.callback);
 		await music.loadAsync(this.props.source);
 
 		this.setState({music});
 	}
 
 	async componentWillUnmount() {
-		await this.state.music.setCallback(null); //setcallback to null to prevent callback after unmount
+		await this.state.music.setOnPlaybackStatusUpdate(null); //setcallback to null to prevent callback after unmount
 		await this.state.music.pauseAsync();
 		await this.state.music.unloadAsync();
 	}

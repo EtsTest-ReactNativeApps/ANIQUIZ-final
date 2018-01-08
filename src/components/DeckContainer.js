@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Dimensions, Animated, TouchableOpacity } from 'react-native';
+import { Text, View, Dimensions, Animated, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import Swiper from './Swiper';
 import { setHintNum} from './../actions';
@@ -7,36 +7,6 @@ import { Scores } from './../common';
 import Quiz from './Quiz';
 import { MUSIC } from './../../assets/packs/music/music';
 import { DB } from './../../db';
-
-/*Dummy Data*/
-
-/*let pack = [
-  { id: 1, title: 'Question 1', question: 'What is the name of this music?', options:['Kino','Tsugumi Seishiro','DEATH THE KID','Riza Hawkeye','Alucard'], answers:['Tsugumi Seishiro'], source:[require('./../../assets/packs/character/6.png'),require('./../../assets/packs/character/5.png')]},
-  { id: 2, title: 'Question 2', question: 'What is the name of this music?', options:['A','B','C','D','E'], answers:['C'], source:[require('./../../assets/packs/character/4.png'),require('./../../assets/packs/character/3.png')]},
-  { id: 3, title: 'Question 3', question: 'What is the name of this music?', options:['Kino','Tsugumi Seishiro','DEATH THE KID','Riza Hawkeye','Alucard'], answers:['Tsugumi Seishiro'], source:[require('./../../assets/packs/character/2.png'),require('./../../assets/packs/character/1.png')]},
-  { id: 4, title: 'Question 4', question: 'What is the name of this music?', options:['Kino','Tsugumi Seishiro','DEATH THE KID','Riza Hawkeye','Alucard'], answers:['Tsugumi Seishiro'], source:[require('./../../assets/packs/character/4.png'),require('./../../assets/packs/character/3.png')]}
-];*/
-
-/*let pack = [
-  { id: 1, title: 'Question 1', question: 'What is the name of this anime?', options:['A','B','C','D','E'], answers:['C'], source:[require('./../../assets/packs/standard/1.jpg')]},
-  { id: 2, title: 'Question 2', question: 'What is the name of this anime?', options:['A','B','C','D','E'], answers:['C'], source:[require('./../../assets/packs/standard/1.jpg')]},
-  { id: 3, title: 'Question 3', question: 'What is the name of this anime?', options:['A','B','C','D','E'], answers:['C'], source:[require('./../../assets/packs/standard/1.jpg')]},
-  { id: 4, title: 'Question 4', question: 'What is the name of this anime?', options:['A','B','C','D','E'], answers:['C'], source:[require('./../../assets/packs/standard/1.jpg')]},
-];*/
-
-/*let pack = [
-  { id: 1, title: 'Question 1', question: 'What is the name of this anime?', options:['A','B','C','D','E'], answers:['C'], source:[require('./../../assets/packs/standard/1.jpg')],music:MUSIC[0]},
-  { id: 2, title: 'Question 2', question: 'What is the name of this anime?', options:['A','B','C','D','E'], answers:['C'], source:[require('./../../assets/packs/standard/1.jpg')],music:MUSIC[0]},
-  { id: 3, title: 'Question 3', question: 'What is the name of this anime?', options:['A','B','C','D','E'], answers:['C'], source:[require('./../../assets/packs/standard/1.jpg')],music:MUSIC[0]},
-  { id: 4, title: 'Question 4', question: 'What is the name of this anime?', options:['A','B','C','D','E'], answers:['C'], source:[require('./../../assets/packs/standard/1.jpg')],music:MUSIC[0]},
-];*/
-
-/*let pack = [
-  { id: 1, title: 'Question 1', question: 'What is the name of this anime?', options:['A','B','C','D','E'], answers:['C'], source:[require('./../../assets/packs/standard/1.jpg')]},
-  { id: 2, title: 'Question 2', question: 'What is the name of this anime?', options:['A','B','C','D','E'], answers:['C'], source:[require('./../../assets/packs/standard/1.jpg')]},
-  { id: 3, title: 'Question 3', question: 'What is the name of this anime?', options:['A','B','C','D','E'], answers:['C'], source:[require('./../../assets/packs/standard/1.jpg')]},
-  { id: 4, title: 'Question 4', question: 'What is the name of this anime?', options:['A','B','C','D','E'], answers:['C'], source:[require('./../../assets/packs/standard/1.jpg')]},
-];*/
  
 class DeckContainer extends Component {
 
@@ -57,7 +27,8 @@ class DeckContainer extends Component {
       DB.transaction(tx => {
         tx.executeSql('select * from Q where category = ?;', [this.props.deck.toLowerCase()], (_, { rows: { _array } }) => {
 
-              let query = _array;
+              let query = _array.sort(()=>.5 - Math.random()).slice(0,10);
+              let selection = [];
 
               for (var i = 0; i < query.length; i++) {
                 let source = [];
@@ -75,9 +46,9 @@ class DeckContainer extends Component {
                 }
 
                 store.push( 
-                  { 
+                  {
                     ...query[i], 
-                    id:(i+1), 
+                    id:(i+1),
                     title:('Question '+(i+1)), 
                     options:query[i].options.split(','), 
                     answers:query[i].answers.split(','), 
@@ -85,6 +56,7 @@ class DeckContainer extends Component {
                     anime: query[i].anime 
                   } 
                 );
+
                 this.setState({pack:store});
               }
             }
@@ -113,7 +85,7 @@ class DeckContainer extends Component {
       return (
           <View 
             style={{
-              width:Dimensions.get('window').width-10,
+              width:Dimensions.get('window').width,
               height:Dimensions.get('window').height,
               marginTop: 25
             }}
@@ -146,7 +118,19 @@ class DeckContainer extends Component {
           </View>
       );
     } else {
-      return null;
+      return(
+        <View 
+            style={{
+              width:Dimensions.get('window').width,
+              height:Dimensions.get('window').height,
+              marginTop: 25,
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            <ActivityIndicator size="large"/>
+        </View>
+      );
     }
   }
 }

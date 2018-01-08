@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, Dimensions } from 'react-native';
+import { View, Text, Image, Dimensions, ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
 import { navigate } from './../actions'
 import { Pill } from './../common';
@@ -8,14 +8,14 @@ class StartScreen extends Component {
 
 	render() {
 		return(
-			<Image style={styles.imageStyle} blurRadius={3} source={require('./../../assets/backgrounds/2.jpg')}>
+			<ImageBackground style={styles.imageStyle} blurRadius={3} source={require('./../../assets/backgrounds/2.jpg')}>
 				<View style={styles.backgroundStyle}></View>
 				<View style={styles.launcherContainer}>
 					<Image style={styles.logoStyle} source={require('./../../assets/icons/logo.png')}/>
 					<Text style={styles.textStyle}>ANIQUIZ</Text>
 					<Pill onPress={()=>{this.props.downloaded === 'empty' ? this.props.navigate('tutorial') : this.props.navigate('pack')}}>START</Pill>
 				</View>
-			</Image>
+			</ImageBackground>
 		);
 	}
 }
